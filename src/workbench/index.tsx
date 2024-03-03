@@ -19,10 +19,8 @@ const PanelView: FC = () => {
 
   const Panel = panelInfo?.component;
 
-  return (
-    <Panel />
-  );
-}
+  return <Panel />;
+};
 
 const WorkbenchCore: FC = () => {
   const { project } = ProjectModel();
@@ -43,7 +41,7 @@ const WorkbenchCore: FC = () => {
               <Fill>
                 <PanelView />
               </Fill>
-              <Bottom size={32}>
+              <Bottom size={28}>
                 <Statusbar />
               </Bottom>
             </ViewPort>

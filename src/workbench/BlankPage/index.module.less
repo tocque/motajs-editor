@@ -1,0 +1,78 @@
+.blank-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo-area {
+  position: absolute;
+  top: 150px;
+  // width: calc(100% - 100px * 2);
+  width: 100%;
+  text-align: center;
+  .logo {
+    font-size: 100px;
+    color: var(--semi-color-text-0);
+  }
+  .slogan {
+    font-size: 20px;
+    color: var(--semi-color-text-1);
+  }
+}
+
+.topbar {
+  position: absolute;
+  top: 0;
+  height: 48px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  background-color: var(--semi-color-bg-3);
+  .item {
+    margin-left: 6px;
+  }
+}
+
+.foot {
+  background-color: rgba(var(--semi-purple-4), 1);
+  // width: calc(100% - 100px * 2);
+  width: 100%;
+  height: 28px;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  color: var(--semi-color-text-1);
+  span {
+    cursor: pointer;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 370px;
+  // width: calc(100% - 100px * 2);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .line {
+    width: 1px;
+    background-color: rgba(var(--semi-grey-2), 1);
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
