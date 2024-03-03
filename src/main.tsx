@@ -1,10 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./view/App.tsx";
+import Workbench from "./workbench/index.tsx";
 import "./index.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <Workbench />
+    </QueryClientProvider>
   </React.StrictMode>,
 );

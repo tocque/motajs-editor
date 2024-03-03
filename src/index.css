@@ -14,6 +14,7 @@ body {
   position: relative;
   box-sizing: border-box;
   padding: 20px;
+  background: var(--semi-color-bg-0);
 }
 
 :root {
@@ -22,4 +23,20 @@ body {
 
 pre {
   font-family: var(--code-font);
+}
+
+body {
+  --semi-color-bg-1: rgba(var(--semi-grey-0), 1);
+  --semi-color-bg-2: rgba(var(--semi-grey-1), 1);
+  --semi-color-bg-3: rgba(var(--semi-grey-2), 1);
+  --semi-color-bg-4: rgba(var(--semi-grey-3), 1);
+  --semi-color-bg-5: rgba(var(--semi-grey-4), 1);
+
+  --semi-color-info: rgba(var(--semi-blue-4), 1) !important;
+  --semi-color-info-hover: rgba(var(--semi-blue-5), 1) !important;
+}
+
+body[theme-mode='dark'] {
+  --semi-color-info: rgba(var(--semi-blue-3), 1) !important;
+  --semi-color-info-hover: rgba(var(--semi-blue-4), 1) !important;
 }

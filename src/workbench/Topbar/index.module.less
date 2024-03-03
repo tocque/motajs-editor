@@ -1,0 +1,38 @@
+.topbar {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--semi-color-bg-3);
+}
+
+.tabs {
+  margin-left: 20px;
+  margin-bottom: -2px;
+  :global {
+    .semi-tabs-bar-line.semi-tabs-bar-top {
+      border-bottom: none;
+    }
+    .semi-tabs-content {
+      display: none;
+    }
+  }
+}
+
+.item {
+  margin-left: 6px;
+}
+
+.logo {
+  :global {
+    h2 {
+      font-size: 24px;
+      margin: 0;
+      display: inline;
+      color: var(--semi-color-text-0);
+    }
+  }
+}
