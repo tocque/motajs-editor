@@ -3,11 +3,11 @@ import { Tabs, Tree } from "@douyinfe/semi-ui";
 import { TreeNodeData, TreeProps } from "@douyinfe/semi-ui/lib/es/tree";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { Fill, LeftResizable } from "react-spaces";
-import styles from './index.module.less';
+import styles from "./index.module.less";
 import { ScriptEditorModel } from "../store/scriptEditor";
 import MonacoEditor from "@/base/components/MonacoEditor";
 import Tab from "./Tab";
-import { useHotkeys } from 'react-hotkeys-hook';
+import { useHotkeys } from "react-hotkeys-hook";
 
 const RenderLabel: TreeProps["renderFullLabel"] = (props) => {
   const { className, onExpand, onClick, data, expandIcon } = props;
@@ -22,18 +22,9 @@ const RenderLabel: TreeProps["renderFullLabel"] = (props) => {
 };
 
 const ScriptEditor: FC = () => {
-
   const { functionsTree } = GameScriptsDataModel();
-  const {
-    openFile,
-    activeFile,
-    saveFile,
-    closeFile,
-    openedFiles,
-    currentFile,
-    expandedKeys,
-    setExpandedKeys,
-  } = ScriptEditorModel();
+  const { openFile, activeFile, saveFile, closeFile, openedFiles, currentFile, expandedKeys, setExpandedKeys } =
+    ScriptEditorModel();
 
   const treeData = useMemo(() => {
     if (!functionsTree) return void 0;
@@ -41,20 +32,25 @@ const ScriptEditor: FC = () => {
       return {
         label: node.title,
         key: node.path,
-        children: node.children?.map(e => toTreeNode(e)),
-      }
+        children: node.children?.map((e) => toTreeNode(e)),
+      };
     };
     return toTreeNode(functionsTree).children;
   }, [functionsTree]);
 
-  useHotkeys('ctrl+s', () => {
-    if (currentFile) {
-      saveFile(currentFile.path);
-    }
-  }, [saveFile], {
-    enableOnContentEditable: true,
-    preventDefault: true,
-  });
+  useHotkeys(
+    "ctrl+s",
+    () => {
+      if (currentFile) {
+        saveFile(currentFile.path);
+      }
+    },
+    [saveFile],
+    {
+      enableOnContentEditable: true,
+      preventDefault: true,
+    },
+  );
 
   return (
     <Fill>
@@ -67,7 +63,7 @@ const ScriptEditor: FC = () => {
             value={currentFile?.path}
             onExpand={setExpandedKeys}
             onChange={(val) => {
-              if (typeof val === 'string') {
+              if (typeof val === "string") {
                 openFile(val);
               }
             }}
@@ -80,16 +76,7 @@ const ScriptEditor: FC = () => {
           type="card"
           tabList={openedFiles.map((e) => ({
             itemKey: e.path,
-            tab: (
-              <Tab
-                key={e.path}
-                title={e.path.split('/').at(-1)!}
-                unsave={e.version !== e.saveVersion}
-                onClose={() => {
-                  closeFile(e.path);
-                }}
-              />
-            ),
+            tab: <Tab key={e.path} data={e} />,
           }))}
           activeKey={currentFile?.path}
           onChange={(key) => {

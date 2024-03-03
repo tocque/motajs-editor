@@ -3,7 +3,7 @@ import { GameScriptsDataModel } from "@/service/data/scripts";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import * as monaco from "monaco-editor";
 
-interface OpenedScriptFile {
+export interface OpenedScriptFile {
   path: string;
   version: number;
   saveVersion: number;
@@ -11,33 +11,36 @@ interface OpenedScriptFile {
 }
 
 const useScriptEditor = () => {
-  
   const [openedFiles, setOpenedFiles] = useState<OpenedScriptFile[]>([]);
   const [currentFileId, setCurrentFileId] = useState<string>();
 
   const { readScript, writeScript } = GameScriptsDataModel();
 
-  const currentFile = useMemo(() => openedFiles.find(e => e.path === currentFileId), [openedFiles, currentFileId]);
+  const currentFile = useMemo(() => openedFiles.find((e) => e.path === currentFileId), [openedFiles, currentFileId]);
 
   const activeFile = (path: string) => {
     setCurrentFileId(path);
-  }
+  };
 
   const openFile = (path: string) => {
-    if (openedFiles.find(e => e.path === path)) {
+    if (openedFiles.find((e) => e.path === path)) {
       activeFile(path);
       return;
     }
     setCurrentFileId(path);
     const content = readScript(path);
-    const model = monaco.editor.createModel(content, 'javascript', monaco.Uri.parse(`metaphysic://${path}.js`));
+    const model = monaco.editor.createModel(content, "javascript", monaco.Uri.parse(`metaphysic://${path}.js`));
     const version = model.getAlternativeVersionId();
-    setOpenedFiles(openedFiles.concat([{
-      path,
-      version, 
-      saveVersion: version,
-      model,
-    }]));
+    setOpenedFiles(
+      openedFiles.concat([
+        {
+          path,
+          version,
+          saveVersion: version,
+          model,
+        },
+      ]),
+    );
     model.onDidChangeContent(() => {
       setOpenedFiles((openedFiles) => {
         const index = openedFiles.findIndex((e) => e.path === path);
@@ -48,7 +51,7 @@ const useScriptEditor = () => {
         });
       });
     });
-  }
+  };
 
   const saveFile = (path: string) => {
     setOpenedFiles((openedFiles) => {
@@ -75,7 +78,7 @@ const useScriptEditor = () => {
       }
     }
     openedFiles[index].model.dispose();
-    setOpenedFiles(openedFiles.filter(e => e.path !== path));
+    setOpenedFiles(openedFiles.filter((e) => e.path !== path));
   };
 
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
@@ -90,6 +93,6 @@ const useScriptEditor = () => {
     expandedKeys,
     setExpandedKeys,
   };
-}
+};
 
 export const ScriptEditorModel = createModel(useScriptEditor);
